@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useLoadScript, Autocomplete } from "@react-google-maps/api";
 import Map from "./Map";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import styles from "./LocationInput.module.css"; 
 
 const libraries = ["places"];
 const center = {
   lat: -23.5505,
   lng: -46.6333,
 };
+
 
 function LocationInput() {
   const { isLoaded, loadError } = useLoadScript({
@@ -46,38 +50,63 @@ function LocationInput() {
   if (!isLoaded) return "Carregando mapas";
 
   return (
-    
-    <div>
-      <div>
-        <h1>TELA DE CADASTRO - DIGA SUA LOCALIZACAO</h1>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <h1>Alugar bicicleta</h1>
       </div>
-      
-      <div>
+  
+      <div className={styles.input}>
         <Autocomplete
           onLoad={(auto) => setAutocomplete(auto)}
           onPlaceChanged={onPlaceChanged}
           fields={["geometry.location", "place_id"]}
         >
-          <input
+          <TextField
             id="location-input"
-            type="text"
-            placeholder="Digite sua localização"
-            style={{ width: "80%", padding: "10px" }}
+            label="Digite sua localização"
+            variant="outlined"
+            fullWidth
+            style={{ marginBottom: "10px" }}
           />
         </Autocomplete>
       </div>
-      <div>
-        <button onClick={() => fetch("http://localhost:8080", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({"lat": currentPosition['lat'], "lng": currentPosition['long'], "local": document.getElementById("location-input").value})
-        })}> manda! </button>
+      <div className={styles.buttonWrapper}>
+        <Button
+          onClick={() =>
+            fetch("http://localhost:8080", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                lat: currentPosition["lat"],
+                lng: currentPosition["long"],
+                origem: document.getElementById("location-input").value,
+              }),
+            })
+              .then((response) => response.json())
+              .then((response) => {
+                console.log(response);
+              })
+              .catch((error) => console.log(error))
+          }
+          variant="contained"
+          color="primary"
+        >
+          manda!
+        </Button>
       </div>
-      <Map currentPosition={currentPosition} markerPosition={markerPosition} />
+      <div className={styles.map}>
+        <Map currentPosition={currentPosition} markerPosition={markerPosition} />
+      </div>
+      <div className={styles.vaiembora}  >
+      <img className={styles.bikeAnimation}
+        src="https://media.giphy.com/media/3o6ZtqcVR1YqKgTwD6/giphy.gif"
+        alt="Bike"
+      />
+      </div>
     </div>
   );
-}
+        }  
 
 export default LocationInput;
