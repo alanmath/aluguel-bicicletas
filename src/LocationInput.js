@@ -46,7 +46,12 @@ function LocationInput() {
   if (!isLoaded) return "Carregando mapas";
 
   return (
+    
     <div>
+      <div>
+        <h1>TELA DE CADASTRO - DIGA SUA LOCALIZACAO</h1>
+      </div>
+      
       <div>
         <Autocomplete
           onLoad={(auto) => setAutocomplete(auto)}
@@ -60,6 +65,15 @@ function LocationInput() {
             style={{ width: "80%", padding: "10px" }}
           />
         </Autocomplete>
+      </div>
+      <div>
+        <button onClick={() => fetch("http://localhost:8080", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({"lat": currentPosition['lat'], "lng": currentPosition['long'], "local": document.getElementById("location-input").value})
+        })}> manda! </button>
       </div>
       <Map currentPosition={currentPosition} markerPosition={markerPosition} />
     </div>
