@@ -50,7 +50,23 @@ function LocationInput() {
   if (!isLoaded) return "Carregando mapas";
 
   return (
+
     <div className={styles.container}>
+          <header className={styles.header_2}>
+    <div className={styles.logo}>
+      <h1></h1>
+    </div>
+    <nav>
+      <ul className={styles.tab}>
+        <li>
+          <a href="#">Listagem de aluguéis</a>
+        </li>
+        <li>
+          <a href="#">Devolução de bicicletas</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
       <div className={styles.header}>
         <h1>Alugar bicicleta</h1>
       </div>
@@ -99,12 +115,8 @@ function LocationInput() {
       <div className={styles.map}>
         <Map currentPosition={currentPosition} markerPosition={markerPosition} />
       </div>
-      <div className={styles.vaiembora}  >
-      <img className={styles.bikeAnimation}
-        src="https://media.giphy.com/media/3o6ZtqcVR1YqKgTwD6/giphy.gif"
-        alt="Bike"
-      />
-      </div>
+
+
     </div>
   );
         }  
