@@ -4,7 +4,9 @@ import Map from "./Map";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import styles from "./LocationInput.module.css"; 
-
+import { useNavigate } from 'react-router-dom';
+import Confirmacao from "./Confirmacao";
+import { style } from "@mui/system";
 const libraries = ["places"];
 const center = {
   lat: -23.5505,
@@ -21,7 +23,35 @@ function LocationInput() {
   const [currentPosition, setCurrentPosition] = useState(center);
   const [markerPosition, setMarkerPosition] = useState(null); // Adicione esta linha
   const [autocomplete, setAutocomplete] = useState(null);
+  const  [dados, setDados] = useState([]);
 
+
+
+  function cadastrar(origem, coordenadas){
+
+   
+    if  (origem == '' || coordenadas == ''){
+      alert('Campos inválidos, pode ser que você não preencheu todos os campos ou não selecionou sua localização no mapa.')
+    }
+    else{
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ "coordInicial":coordenadas, "origem":origem })
+    };
+    fetch('http://localhost:8080/aluguel', requestOptions)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data)
+      setDados(data)
+   
+    })
+    }
+  }
+
+
+    
+    
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -49,75 +79,80 @@ function LocationInput() {
   if (loadError) return "Erro ao carregar mapas";
   if (!isLoaded) return "Carregando mapas";
 
-  return (
 
-    <div className={styles.container}>
-          <header className={styles.header_2}>
-    <div className={styles.logo}>
-      <h1></h1>
+
+
+  if (dados.length ==  0){
+
+    return(
+
+  <div className={styles.container}>
+        <header className={styles.header_2}>
+  <div className={styles.logo}>
+    <h1></h1>
+  </div>
+  <nav>
+    <ul className={styles.tab}>
+      <li>
+        <a href="listagem-aluguel">Listagem de aluguéis</a>
+      </li>
+      
+    </ul>
+  </nav>
+</header>
+    <div className={styles.header}>
+      <h1>Alugar bicicleta</h1>
     </div>
-    <nav>
-      <ul className={styles.tab}>
-        <li>
-          <a href="#">Listagem de aluguéis</a>
-        </li>
-        <li>
-          <a href="#">Devolução de bicicletas</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
-      <div className={styles.header}>
-        <h1>Alugar bicicleta</h1>
-      </div>
-  
-      <div className={styles.input}>
-        <Autocomplete
-          onLoad={(auto) => setAutocomplete(auto)}
-          onPlaceChanged={onPlaceChanged}
-          fields={["geometry.location", "place_id"]}
-        >
-          <TextField
-            id="location-input"
-            label="Digite sua localização"
-            variant="outlined"
-            fullWidth
-            style={{ marginBottom: "10px" }}
-          />
-        </Autocomplete>
-      </div>
-      <div className={styles.buttonWrapper}>
-        <Button
-          onClick={() =>
-            fetch("http://localhost:8080/aluguel", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                coordInicial:[currentPosition.lat, currentPosition.lng],
-                origem: document.getElementById("location-input").value,
-              }),
-            })
-              .then((response) => response.json())
-              .then((response) => {
-                console.log(response);
-              })
-              .catch((error) => console.log(error))
-          }
-          variant="contained"
-          color="primary"
-        >
-          cadastrar aluguel!
-        </Button>
-      </div>
-      <div className={styles.map}>
-        <Map currentPosition={currentPosition} markerPosition={markerPosition} />
-      </div>
 
-
+    <div className={styles.input}>
+      <Autocomplete
+        onLoad={(auto) => setAutocomplete(auto)}
+        onPlaceChanged={onPlaceChanged}
+        fields={["geometry.location", "place_id"]}
+      >
+        <TextField
+          id="location-input"
+          label="Digite sua localização"
+          variant="outlined"
+          fullWidth
+          style={{ marginBottom: "10px" }}
+        />
+      </Autocomplete>
     </div>
-  );
-        }  
+    <div className={styles.buttonWrapper}>
 
+    
+      <Button
+        onClick={() => cadastrar( document.getElementById("location-input").value, [center.lat,center.lng])}
+          
+        variant="contained"
+        color="primary"
+      >
+        cadastrar aluguel!
+      </Button>
+
+
+      
+    </div>
+    <div className={styles.map}>
+      <Map currentPosition={currentPosition} markerPosition={markerPosition} />
+    </div>
+
+
+  </div>
+)}
+else{
+  return(
+
+    <div className="aluguel-confirmado" >
+      <Confirmacao dado = {dados} ></Confirmacao>
+    </div>
+
+
+
+  )
+
+
+
+      } }
 export default LocationInput;
