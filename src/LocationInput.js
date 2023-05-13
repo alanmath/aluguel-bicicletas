@@ -148,8 +148,6 @@ else{
       <Confirmacao dado = {dados} ></Confirmacao>
     </div>
 
-
-
   )
 
 
