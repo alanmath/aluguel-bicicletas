@@ -8,7 +8,7 @@ export default function ListagemAlugueis() {
 
 
     async function ListagemAlugueis() {
-        let listTeams = await fetch('http://localhost:8080/aluguel', {
+        let ListagemAlugueis = await fetch('http://localhost:8080/aluguel', {
             method: 'GET'
         }).then(response => {
             if (response.status === 200) {
@@ -22,15 +22,19 @@ export default function ListagemAlugueis() {
         setData(ListagemAlugueis)
     }
 
+    console.log(data)
+
     useEffect(() => {
         ListagemAlugueis ()
     }, [])
 
 
     const columns = [
-        { field: 'identifier', width: '300' },
-        { field: 'name', width: '700' }
+        { field: 'origem', width: '300px' },
+        { field: 'status', width: '700px' }
     ]
+
+    console.log(data)
 
 
     return (
@@ -46,7 +50,7 @@ export default function ListagemAlugueis() {
                 autoHeight
                 rows={data}
                 columns={columns}
-                getRowId={(row) => row.identifier}
+                getRowId={(row) => row.id}
                 initialState={{
                     pagination: {
                         paginationModel: {

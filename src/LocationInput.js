@@ -89,14 +89,13 @@ function LocationInput() {
       <div className={styles.buttonWrapper}>
         <Button
           onClick={() =>
-            fetch("http://localhost:8080", {
+            fetch("http://localhost:8080/aluguel", {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
               },
               body: JSON.stringify({
-                lat: currentPosition["lat"],
-                lng: currentPosition["long"],
+                coordInicial:[currentPosition.lat, currentPosition.lng],
                 origem: document.getElementById("location-input").value,
               }),
             })
@@ -109,7 +108,7 @@ function LocationInput() {
           variant="contained"
           color="primary"
         >
-          manda!
+          cadastrar aluguel!
         </Button>
       </div>
       <div className={styles.map}>
