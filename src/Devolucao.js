@@ -123,7 +123,6 @@ function Devolucao() {
     </div>
     <div className={styles.buttonWrapper}>
 
-    
       <Button
         onClick={() => devolver( document.getElementById("location-input").value, [center.lat,center.lng])}
           
@@ -131,16 +130,11 @@ function Devolucao() {
         color="primary"
       >
         devolver aluguel!
-      </Button>
-
-
-      
+      </Button>      
     </div>
     <div className={styles.map}>
       <Map currentPosition={currentPosition} markerPosition={markerPosition} />
     </div>
-
-
   </div>
 )}else{
     return(
