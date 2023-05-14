@@ -15,8 +15,7 @@ function App() {
       <Route path="/listagem-aluguel" element={<ListagemAlugueis />} />
       <Route path="/confirmacao" element={<Confirmacao/>} />
       
-      
-      </Routes>    
+      </Routes>
     </BrowserRouter>
   );
 }

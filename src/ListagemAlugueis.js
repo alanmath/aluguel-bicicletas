@@ -1,41 +1,74 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 export default function ListagemAlugueis() {
 
-    const [data, setData] = useState([])
+    const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
-
-    async function ListagemAlugueis() {
-        let ListagemAlugueis = await fetch('http://localhost:8080/aluguel', {
+    async function fetchAlugueis() {
+        let response = await fetch('http://localhost:8080/aluguel', {
             method: 'GET'
         }).then(response => {
             if (response.status === 200) {
-                return response.json()
+                return response.json();
             }
-            return []
+            return [];
         }).catch(ex => {
-            //setMensagem('Erro ao listar times')
-            return []
-        })
-        setData(ListagemAlugueis)
+            return [];
+        });
+        setData(response);
     }
 
-    console.log(data)
-
     useEffect(() => {
-        ListagemAlugueis ()
-    }, [])
-
+        fetchAlugueis();
+    }, []);
 
     const columns = [
-        { field: 'origem', width: '300px' },
-        { field: 'status', width: '700px' }
-    ]
-
-    console.log(data)
-
+        { field: 'origem', headerName: 'Origem', width: 150 },
+        { field: 'status', headerName: 'Status', width: 150 },
+        {
+            field: 'delete',
+            headerName: 'Delete',
+            sortable: false,
+            width: 100,
+            disableClickEventBubbling: true,
+            renderCell: (params) => {
+                const onClick = async () => {
+                    try {
+                        const response = await fetch(`http://localhost:8080/aluguel/${params.row.id}`, {
+                            method: 'DELETE',
+                        });
+    
+                        if (response.ok) {
+                            setData(data.filter(item => item.id !== params.row.id));
+                        }
+                    } catch (ex) {
+                        // handle error
+                    }
+                };
+    
+                return <Button variant="contained" color="error" onClick={onClick}>Delete</Button>;
+            }
+        },
+        {
+            field: 'redirect',
+            headerName: 'Redirect',
+            sortable: false,
+            width: 150,
+            disableClickEventBubbling: true,
+            renderCell: (params) => {
+                const onClick = () => {
+                    navigate(`/devolucao/${params.row.identificador}`);
+                };
+    
+                return <Button variant="contained" color="primary" onClick={onClick}>Redirect</Button>;
+            }
+        }
+    ];
+    
 
     return (
         <Box
@@ -62,8 +95,6 @@ export default function ListagemAlugueis() {
                 checkboxSelection
                 disableRowSelectionOnClick
             />
-
         </Box>
-    )
-
+    );
 }
