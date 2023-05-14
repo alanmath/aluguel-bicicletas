@@ -5,7 +5,7 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import styles from "./LocationInput.module.css"; 
 import { useParams } from "react-router-dom";
-
+import ConfirmacaoDevolucao from "./ConfirmacaoDevolucao.js";
 const libraries = ["places"];
 const center = {
     lat: -23.5505,
@@ -85,7 +85,7 @@ function Devolucao() {
   if (!isLoaded) return "Carregando mapas";
 
 
-
+    if (dados.destino == null){
     return(
 
   <div className={styles.container}>
@@ -142,7 +142,13 @@ function Devolucao() {
 
 
   </div>
-)
+)}else{
+    return(
+
+        <ConfirmacaoDevolucao dado={dados}/>
+    )
+
+}
 
 
 
