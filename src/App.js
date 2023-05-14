@@ -16,8 +16,7 @@ function App() {
       <Route path="/confirmacao" element={<Confirmacao/>} />
       <Route path = "/devolucao/86e875e-f756-4fb2-8501-6cedca8a492d" element = {<Devolucao/>} />
       
-      
-      </Routes>    
+      </Routes>
     </BrowserRouter>
   );
 }
