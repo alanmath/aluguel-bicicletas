@@ -45,7 +45,7 @@ function Devolucao() {
         body: JSON.stringify({ "coordDestino":coordenadas, "destino":destino })
     };
     fetch(`http://localhost:8080/aluguel/${id}`, requestOptions)
-    .then()
+    .then(data => data.json())
     .then(data => {
       console.log(data)
       setDados(data)

@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
-import { colors } from '@mui/material';
-import Aluguel from './Aluguel';
+import { Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
 export default function ListagemAlugueis() {
-  const [data, setData] = useState([]);
-  let indice = []
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('http://localhost:8080/aluguel');
-      const json = await response.json();
-      setData(json);
-        }
-    fetchData();
-  }, []);
+
+    const [data, setData] = useState([]);
+    const navigate = useNavigate();
+
+    async function fetchAlugueis() {
+        let response = await fetch('http://localhost:8080/aluguel', {
+            method: 'GET'
+        }).then(response => {
+            if (response.status === 200) {
+                return response.json();
+            }
+            return [];
+        }).catch(ex => {
+            return [];
+        });
+        setData(response);
+    }
 
     useEffect(() => {
         fetchAlugueis();
@@ -60,7 +68,6 @@ export default function ListagemAlugueis() {
             }
         }
     ];
-    
 
     return (
         <Box
