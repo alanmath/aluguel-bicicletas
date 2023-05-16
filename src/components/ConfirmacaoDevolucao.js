@@ -29,12 +29,12 @@ function ConfirmacaoDevolucao(props) {
       <p>Modelo da bike: {props.dado.modeloBike}</p>
       <p>Origem: {props.dado.origem}</p>
       <p>Data: {props.dado.diaHoraInicio}</p>
-      <p>Preço por hora: {props.dado.precoPHora}</p>
+      <p>Preço por hora: R$ {props.dado.precoPHora}</p>
       <p>Status: {props.dado.status}</p>
       <p>Destino: {props.dado.destino}</p>
-      <p>Distância: {props.dado.distancia}</p>
-      <p>Preço total: {props.dado.preco}</p>
-      <p>Tempo de viagem: {props.dado.tempoDeViagem}</p>
+      <p>Distância: {props.dado.distancia} km</p>
+      <p>Preço total:R$ {props.dado.preco}</p>
+      <p>Tempo de viagem: {props.dado.tempoDeViagem} h</p>
 
     </div>
    
