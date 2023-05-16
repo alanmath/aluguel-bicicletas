@@ -34,7 +34,7 @@ function ConfirmacaoDevolucao(props) {
       <p>Destino: {props.dado.destino}</p>
       <p>Distância: {props.dado.distancia} km</p>
       <p>Preço total:R$ {props.dado.preco}</p>
-      <p>Tempo de viagem: {props.dado.tempoDeViagem} h</p>
+      <p>Tempo de viagem: {props.dado.tempoDeViagem/3600} h</p>
 
     </div>
    
