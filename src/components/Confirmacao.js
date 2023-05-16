@@ -1,6 +1,6 @@
 import React from "react";
 import '../css/confirmacao.css'
-import styles from "../css/confirmacao.css"; 
+import styles from "../css/LocationInput.module.css"; 
 
 function Confirmacao(props) {
   
@@ -28,7 +28,7 @@ function Confirmacao(props) {
       <h1>Cadastro realizado com sucesso!</h1>
       <p>Origem: {props.dado.origem}</p>
       <p>Data: {props.dado.diaHoraInicio}</p>
-      <p>Preço por hora: {props.dado.precoPHora}</p>
+      <p>Preço por hora: {props.dado.precoPHora} h</p>
       <p>Status: {props.dado.status}</p>
     </div>
    
