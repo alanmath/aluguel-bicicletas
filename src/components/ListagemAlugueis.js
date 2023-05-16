@@ -64,7 +64,7 @@ export default function ListagemAlugueis() {
                     navigate(`/devolucao/${params.row.identificador}`);
                 };
     
-                return <Button variant="contained" color="primary" onClick={onClick}>Redirect</Button>;
+                return <Button variant="contained" color="primary" onClick={onClick}>DEVOLVER</Button>;
             }
         }
     ];

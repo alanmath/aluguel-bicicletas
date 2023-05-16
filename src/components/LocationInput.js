@@ -125,8 +125,7 @@ function LocationInput() {
 
     
       <Button
-        onClick={() => cadastrar( document.getElementById("location-input").value, [center.lat,center.lng])}
-          
+        onClick={() => cadastrar( document.getElementById("location-input").value, [currentPosition.lat,currentPosition.lng])}
         variant="contained"
         color="primary"
       >

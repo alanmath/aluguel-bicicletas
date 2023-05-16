@@ -115,7 +115,8 @@ function Devolucao() {
     <div className={styles.buttonWrapper}>
 
       <Button
-        onClick={() => devolver( document.getElementById("location-input").value, [center.lat,center.lng])}
+        
+        onClick={() => devolver( document.getElementById("location-input").value, [currentPosition.lat,currentPosition.lng])}
           
         variant="contained"
         color="primary"

@@ -1,6 +1,6 @@
 import React from "react";
 import '../css/confirmacao.css'
-import styles from "../css/confirmacao.css"; 
+import styles from "../css/LocationInput.module.css"; 
 
 function Confirmacao(props) {
   

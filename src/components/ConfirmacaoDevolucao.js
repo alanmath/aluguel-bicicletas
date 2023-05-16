@@ -1,6 +1,6 @@
 import React from "react";
 import '../css/confirmacao.css'
-import styles from "../css/confirmacao.css"; 
+import styles from "../css/LocationInput.module.css"; 
 
 function ConfirmacaoDevolucao(props) {
   
@@ -13,7 +13,7 @@ function ConfirmacaoDevolucao(props) {
         <nav>
     <ul className={styles.tab}>
     <li>
-        <a href="listagem-aluguel">Listagem de aluguéis</a>
+        <a href="/listagem-aluguel">Listagem de aluguéis</a>
     </li>
     
     </ul>
@@ -29,7 +29,7 @@ function ConfirmacaoDevolucao(props) {
       <p>Modelo da bike: {props.dado.modeloBike}</p>
       <p>Origem: {props.dado.origem}</p>
       <p>Data: {props.dado.diaHoraInicio}</p>
-      <p>Preço por hora: {props.dado.precoPHora}</p>
+      <p>Preço por hora: {props.dado.precoPorHora}</p>
       <p>Status: {props.dado.status}</p>
       <p>Destino: {props.dado.destino}</p>
       <p>Distância: {props.dado.distancia}</p>
