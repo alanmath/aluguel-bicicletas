@@ -3,9 +3,9 @@ import { useLoadScript, Autocomplete } from "@react-google-maps/api";
 import Map from "./Map";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import styles from "./LocationInput.module.css"; 
+import styles from "../css/LocationInput.module.css"; 
 import { useNavigate } from 'react-router-dom';
-import Confirmacao from "./Confirmacao";
+import Confirmacao from "../components/Confirmacao.js";
 import { style } from "@mui/system";
 const libraries = ["places"];
 const center = {

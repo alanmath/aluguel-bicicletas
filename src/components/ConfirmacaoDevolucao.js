@@ -1,8 +1,8 @@
 import React from "react";
-import './confirmacao.css'
-import styles from "./LocationInput.module.css"; 
+import '../css/confirmacao.css'
+import styles from "../css/confirmacao.css"; 
 
-function Confirmacao(props) {
+function ConfirmacaoDevolucao(props) {
   
 
   return (
@@ -25,11 +25,17 @@ function Confirmacao(props) {
     </header>
     </div>
     <div className="confirmado" >
-      <h1>Cadastro realizado com sucesso!</h1>
+      <h1>Bike devolvida com sucesso!</h1>
+      <p>Modelo da bike: {props.dado.modeloBike}</p>
       <p>Origem: {props.dado.origem}</p>
       <p>Data: {props.dado.diaHoraInicio}</p>
       <p>Preço por hora: {props.dado.precoPHora}</p>
       <p>Status: {props.dado.status}</p>
+      <p>Destino: {props.dado.destino}</p>
+      <p>Distância: {props.dado.distancia}</p>
+      <p>Preço total: {props.dado.preco}</p>
+      <p>Tempo de viagem: {props.dado.tempoDeViagem}</p>
+
     </div>
    
 
@@ -37,4 +43,4 @@ function Confirmacao(props) {
   );
 }
 
-export default Confirmacao;
+export default ConfirmacaoDevolucao;

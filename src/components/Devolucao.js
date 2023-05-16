@@ -3,9 +3,9 @@ import { useLoadScript, Autocomplete } from "@react-google-maps/api";
 import Map from "./Map";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import styles from "./LocationInput.module.css"; 
+import styles from "../css/LocationInput.module.css"; 
 import { useParams } from "react-router-dom";
-import ConfirmacaoDevolucao from "./ConfirmacaoDevolucao.js";
+import ConfirmacaoDevolucao from "../components/ConfirmacaoDevolucao.js";
 const libraries = ["places"];
 const center = {
     lat: -23.5505,
@@ -22,10 +22,6 @@ function Devolucao() {
   const [markerPosition, setMarkerPosition] = useState(null); // Adicione esta linha
   const [autocomplete, setAutocomplete] = useState(null);
   const  [dados, setDados] = useState([]);
-
-
-
-
   function devolver(destino, coordenadas){
     
 
@@ -52,10 +48,7 @@ function Devolucao() {
    
     })
     }
-  }
-
-
-    
+  } 
     
   useEffect(() => {
     if (navigator.geolocation) {
@@ -84,7 +77,6 @@ function Devolucao() {
   if (loadError) return "Erro ao carregar mapas";
   if (!isLoaded) return "Carregando mapas";
 
-
     if (dados.destino == null){
     return(
 
@@ -96,9 +88,8 @@ function Devolucao() {
   <nav>
     <ul className={styles.tab}>
       <li>
-        <a href="listagem-aluguel">Listagem de aluguéis</a>
+        <a href="/listagem-aluguel">Listagem de aluguéis</a>
       </li>
-      
     </ul>
   </nav>
 </header>
@@ -143,9 +134,5 @@ function Devolucao() {
     )
 
 }
-
-
-
-
-      } 
+} 
 export default Devolucao;
