@@ -43,9 +43,11 @@ function LocationInput() {
     .then(response => response.json())
     .then(data => {
       console.log(data)
-      setDados(data)
-   
-    })
+      if (data.modelo === null) {
+        alert('Não há bicicletas disponíveis no momento.');
+      } else {
+        setDados(data);
+    }})
     }
   }
 
